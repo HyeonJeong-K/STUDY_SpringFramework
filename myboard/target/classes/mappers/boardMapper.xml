@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper	namespace="com.test.board.mappers.boardMapper">
+
+	<insert id="insert"> 
+		insert into BOARD (board_seq, title, content, writer, password, regdate, readcnt)
+		values (board_seq.nextval, #{title}, #{content}, #{writer}, #{password}, sysdate, #{readcnt})
+	</insert>
+	
+	<select id="select" resultMap="BoardResultMap"> 
+		select "BOARD_SEQ", "TITLE", "CONTENT", "WRITER", "REGDATE", "READCNT"
+		from BOARD where BOARD_SEQ = #{board_seq}
+	</select>
+	
+	<update id="update"> 
+		update BOARD set "TITLE" = #{title}, "CONTENT" = #{content}, WRITER = #{writer}
+		where BOARD_SEQ = #{board_seq} and PASSWORD = #{password}
+	</update>
+	
+	<delete id="delete"> 
+		delete from BOARD where board_seq = #{board_seq}
+	</delete>
+	
+	<select id="list" resultType="BoardVO"> 
+	<![CDATA[ select "BOARD_SEQ", "TITLE", "CONTENT", "WRITER", "REGDATE", "READCNT" 
+				from BOARD where "BOARD_SEQ" > 0 order by "BOARD_SEQ" desc, "REGDATE" desc ]]>
+	</select>
+	
+	<update id="updateCount" parameterType="int">
+		update BOARD set READCNT = readcnt + 1 where BOARD_SEQ = #{board_seq}
+	</update>
+	
+	
+	<select id="listPaging" resultMap="BoardResultMap"> 
+	<![CDATA[SELECT article_no, title, content, writer, regdate, viewcnt FROM article WHERE article_no > 0 ORDER BY article_no DESC, regdate DESC WHERE #{page} <=10]]>
+	</select>
+	<select id="listCriteria" resultMap="BoardResultMap"> 
+	<![CDATA[SELECT article_no, title, content, writer, regdate, viewcnt FROM (SELECT article_no, title, content, writer, regdate, viewcnt, ROW_NUMBER() OVER (ORDER BY article_no DESC, regdate DESC) AS RNUM FROM article where article_no > 0) art WHERE RNUM BETWEEN ((#{page} -1) * 10)+1 AND #{page} * 10 ORDER BY article_no DESC, regdate DESC]]>
+	</select>
+	<select id="countArticles" resultType="int"> <![CDATA[ SELECT COUNT(article_no) FROM article WHERE article_no > 0 ]]>
+	</select>
+	<select id="listSearch" resultMap="BoardResultMap">
+		<![CDATA[SELECT article_no, title, content, writer, regdate, viewcnt FROM (SELECT article_no, title, content, writer, regdate, viewcnt, ROW_NUMBER() OVER (ORDER BY article_no DESC, regdate DESC) AS RNUM FROM article where article_no > 0]]> <include refid="search" /><![CDATA[) art WHERE RNUM BETWEEN ((#{page} -1) * 10)+1 AND #{page} * 10 ORDER BY article_no DESC, regdate DESC]]> 
+		</select>
+		<select id="countSearchedArticles" resultType="int"> <![CDATA[ SELECT COUNT(article_no) FROM article WHERE article_no > 0 ]]>
+			<include refid="search" />
+		</select>
+		<sql id="search">
+			<if test="searchType != null">
+				<if test="searchType == 't'.toString()">AND TITLE LIKE '%' || #{keyword} || '%'</if>
+				<if test="searchType == 'c'.toString()">AND CONTENT LIKE '%' || #{keyword} || '%'</if>
+				<if test="searchType == 'w'.toString()">AND WRITER LIKE '%' || #{keyword} || '%'</if>
+				<if test="searchType == 'tc'.toString()">AND (TITLE LIKE '%' || #{keyword} || '%') or (CONTENT
+					LIKE '%' || #{keyword} || '%')</if>
+				<if test="searchType == 'cw'.toString()">AND (content LIKE '%' || #{keyword} || '%') or (writer
+					LIKE '%' || #{keyword} || '%')</if>
+				<if test="searchType == 'tcw'.toString()">AND (title LIKE '%' || #{keyword} || '%') or (content
+					LIKE '%' || #{keyword} || '%') or (writer LIKE '%' || #{keyword} ||
+					'%')</if>
+			</if>
+		</sql>
+
+		<resultMap id="BoardResultMap" type="BoardVO">
+			<id property="board_seq" column="board_seq" />
+			<result property="title" column="title" />
+			<result property="content" column="content" />
+			<result property="writer" column="writer" />
+			<result property="password" column="password" />
+			<result property="regdate" column="regdate" />
+			<result property="readcnt" column="readcnt" />
+		</resultMap>
+</mapper>
+
