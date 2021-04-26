@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper	namespace="com.test.board.mappers.boardMapper">
 
+	<!-- 게시판 쿼리 -->
 	<insert id="insert"> 
 		insert into BOARD (board_seq, title, content, writer, password, regdate, readcnt)
 		values (board_seq.nextval, #{title}, #{content}, #{writer}, #{password}, sysdate, #{readcnt})
@@ -18,7 +19,7 @@
 	</update>
 	
 	<delete id="delete"> 
-		delete from BOARD where board_seq = #{board_seq}
+		delete from BOARD where board_seq = #{board_seq} and password = #{password}
 	</delete>
 	
 	<select id="list" resultType="BoardVO"> 
@@ -29,6 +30,30 @@
 	<update id="updateCount" parameterType="int">
 		update BOARD set READCNT = readcnt + 1 where BOARD_SEQ = #{board_seq}
 	</update>
+	
+	
+	
+	<!-- 댓글 쿼리 -->
+	<insert id="repInsert"> 
+		insert into REPLY (rep_seq, board_seq, rep_text, rep_writer, rep_date)
+		values (rep_seq.nextval, #{board_seq}, #{rep_text}, #{rep_writer}, sysdate)
+	</insert>
+	
+	<update id="repUpdate"> 
+		update REPLY set  "REP_TEXT" = #{rep_text}, REP_WRITER = #{rep_writer}, REP_DATE = sysdate
+		where REP_SEQ = #{rep_seq}
+	</update>
+	
+	<delete id="repDelete"> 
+		delete from REPLY where rep_seq = #{rep_seq}
+	</delete>
+	
+	<select id="repList" resultType="ReplyVO"> 
+	<![CDATA[ select "REP_SEQ", "BOARD_SEQ", "REP_TEXT", "REP_WRITER", "REP_DATE"
+				from REPLY where "BOARD_SEQ" = #{board_seq} order by "REP_DATE" desc ]]>
+	</select>
+	
+	
 	
 	
 	<select id="listPaging" resultMap="BoardResultMap"> 
@@ -60,6 +85,17 @@
 			</if>
 		</sql>
 
+		
+	
+
+		<resultMap id="ReplyResultMap" type="ReplyVO">
+			<id property="rep_seq" column="rep_seq" />
+			<id property="board_seq" column="board_seq" />
+			<result property="rep_text" column="rep_text" />
+			<result property="rep_writer" column="rep_writer" />
+			<result property="rep_date" column="rep_date" />
+		</resultMap>
+		
 		<resultMap id="BoardResultMap" type="BoardVO">
 			<id property="board_seq" column="board_seq" />
 			<result property="title" column="title" />

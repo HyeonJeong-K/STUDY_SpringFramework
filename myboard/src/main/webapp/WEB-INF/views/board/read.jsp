@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,10 +31,22 @@
 			<td>${boardVO.readcnt}</td>
 		</tr>
 	</table>
+	
 	<div>
 		<a href="<c:url value="/edit/${boardVO.board_seq}"/>">수정</a>
 		<a href="<c:url value="/delete/${boardVO.board_seq}"/>">삭제</a>
 		<a href="<c:url value="/list"/>">목록</a>
 	</div>
+	
+	<div>
+		<a href="<c:url value="/msgWrite/${boardVO.board_seq}"/>">쪽지보내기</a>
+	</div>
+	
+	<form:form commandName="replyVO" method="POST">
+		<%@ include file="/WEB-INF/views/reply/repWrite.jsp" %>
+	</form:form>
+	
+	<%@ include file="/WEB-INF/views/reply/repList.jsp" %>
+	
 </body>
 </html>
