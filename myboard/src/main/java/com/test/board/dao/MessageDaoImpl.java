@@ -38,7 +38,7 @@ public class MessageDaoImpl implements MessageDao{
 
 	@Override
 	public int msgDelete(int msg_seq) {
-		return sqlSessionTemplate.delete("msgDelte", msg_seq);
+		return sqlSessionTemplate.delete("msgDelete", msg_seq);
 	}
 	
 }

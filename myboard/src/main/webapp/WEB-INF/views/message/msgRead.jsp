@@ -29,8 +29,8 @@
 	</table>
 	
 	<div>
-		<a href="<c:url value="/msgDelete/${messageVO.msg_seq}"/>">삭제</a>
-		<a href="<c:url value="/msgList/${messagVO.board_seq}"/>">목록</a>
+		<a href="<c:url value="/${messageVO.board_seq}/msgDelete/${messageVO.msg_seq}"/>">삭제</a>
+		<a href="<c:url value="/msgList/${messageVO.board_seq}"/>">목록</a>
 	</div>
 	
 </body>

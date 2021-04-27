@@ -19,7 +19,7 @@
 		<c:forEach var="message" items="${msgList}" varStatus="loop">
 			<tr>
 				<td>${message.msg_seq}</td>
-				<td><a href="<c:url value="/msgRead/${message.msg_seq}" />">${message.msg_title} </a></td>
+				<td><a href="<c:url value="/${message.board_seq}/msgRead/${message.msg_seq}" />">${message.msg_title} </a></td>
 				<td>${message.msg_writer}</td>
 				<td>${message.msg_date}</td>
 			</tr>

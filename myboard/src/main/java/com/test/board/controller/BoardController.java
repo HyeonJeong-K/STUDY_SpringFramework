@@ -117,6 +117,8 @@ public class BoardController {
 		}
 	}
 	
+	
+	
 	// 쪽지 목록
 	@RequestMapping(value = "/msgList/{board_seq}") // 글 목록
 	public String msgList(Model model, @PathVariable int board_seq) {
@@ -143,10 +145,32 @@ public class BoardController {
 	}
 	
 	// 쪽지 읽기
-	@RequestMapping(value = "/msgRead/{msg_seq}", method = RequestMethod.GET) // 페이지 링크 값 c:url value="/board/read/${board.seq}" 글 읽기
-	public String msgRead(Model model, @PathVariable int msg_seq) {
+	@RequestMapping(value = "/{board_seq}/msgRead/{msg_seq}", method = RequestMethod.GET) // 페이지 링크 값 c:url value="/board/read/${board.seq}" 글 읽기
+	public String msgRead(Model model, @PathVariable int msg_seq, @PathVariable int board_seq) {
 		model.addAttribute("messageVO", messageService.msgSelect(msg_seq));
+		model.addAttribute("board_seq", board_seq);
 		return "/message/msgRead";
 	}
+	
+	// 쪽지 삭제
+	@RequestMapping(value = "/{board_seq}/msgDelete/{msg_seq}", method = RequestMethod.GET)
+	public String msgDelete(@PathVariable int msg_seq, @PathVariable int board_seq, Model model) {
+		model.addAttribute("msg_seq", msg_seq);
+		return "/message/msgDelete";
+	}
+	
+	@RequestMapping(value="/{board_seq}/msgDelete/{msg_seq}", method = RequestMethod.POST)
+	public String msgDelete(@PathVariable int msg_seq, @PathVariable int board_seq, Model model, boolean check) {
+		//model.addAttribute("board_seq", board_seq);	// msgList?board_seq=7이라고 나옴........ㅠㅡㅠ
+		
+		if(check == false) {
+			model.addAttribute("msg_seq", msg_seq);
+			return "/message/msgDelete";
+		} else {
+			messageService.msgDelete(msg_seq);
+			return "redirect:/msgList/{board_seq}";
+		}
+	}
+	
 	
 }
