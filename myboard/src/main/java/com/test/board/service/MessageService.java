@@ -6,6 +6,8 @@ import com.test.board.domain.MessageVO;
 
 public interface MessageService {
 	
+	// 쪽지 기능
+	
 	public abstract List<MessageVO> msgList(int board_seq);
 	
 	public abstract void msgInsert(MessageVO messageVO);

@@ -20,6 +20,7 @@ public class BoardServiceImpl implements BoardService{
 	}
 	
 	// 게시판 기능
+	
 	@Override
 	public List<BoardVO> list() {
 		return boardDao.list();
@@ -54,6 +55,7 @@ public class BoardServiceImpl implements BoardService{
 	
 	
 	// 댓글 기능
+	
 	@Override
 	public List<ReplyVO> repList(int board_seq) {
 		return boardDao.repList(board_seq);

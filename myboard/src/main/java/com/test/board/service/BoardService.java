@@ -6,7 +6,9 @@ import com.test.board.domain.BoardVO;
 import com.test.board.domain.ReplyVO;
 
 public interface BoardService {
+	
 	// 게시판 기능
+	
 	public abstract List<BoardVO> list();
 	
 	public abstract void insert(BoardVO boardVO);
@@ -21,6 +23,7 @@ public interface BoardService {
 	
 	
 	// 댓글 기능
+	
 	public abstract List<ReplyVO> repList(int board_seq);
 	
 	public abstract int repDelete(int rep_seq);

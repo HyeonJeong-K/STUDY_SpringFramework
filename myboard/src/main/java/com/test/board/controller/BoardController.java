@@ -117,8 +117,6 @@ public class BoardController {
 		}
 	}
 	
-	
-	
 	// 쪽지 목록
 	@RequestMapping(value = "/msgList/{board_seq}") // 글 목록
 	public String msgList(Model model, @PathVariable int board_seq) {

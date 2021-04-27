@@ -28,6 +28,7 @@
 				<td><input type="password" id="password" name="password"/>${msg}</td>
 			</tr>
 		</table>
+		
 		<div>
 			<input type="submit" value="등록">&nbsp&nbsp
 			<a href="<c:url value="/list"/>">목 록</a>

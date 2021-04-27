@@ -19,6 +19,7 @@ public class MessageDaoImpl implements MessageDao{
 	}
 	
 	// 쪽지 기능
+	
 	@Override
 	public List<MessageVO> msgList(int board_seq) {
 		return sqlSessionTemplate.selectList("msgList", board_seq);

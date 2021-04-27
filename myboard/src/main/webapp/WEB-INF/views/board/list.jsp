@@ -16,6 +16,7 @@
 			<th>작성일</th>
 			<th>조회수</th>
 		</tr>
+		
 		<c:forEach var="board" items="${list}" varStatus="loop">
 			<tr>
 				<td>${board.board_seq}</td>

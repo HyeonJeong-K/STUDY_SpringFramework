@@ -13,6 +13,7 @@
 		<td><form:input path="rep_writer" /><td><form:errors path="rep_writer" /></td>
 	</tr>
 </table>
+
 <div>
 	<input type="submit" value="댓글등록">&nbsp&nbsp
 </div>

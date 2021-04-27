@@ -87,7 +87,6 @@
 
 		
 	
-
 		<resultMap id="ReplyResultMap" type="ReplyVO">
 			<id property="rep_seq" column="rep_seq" />
 			<id property="board_seq" column="board_seq" />

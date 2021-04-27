@@ -15,6 +15,7 @@
 			<th>작성자</th>
 			<th>작성일</th>
 		</tr>
+		
 		<c:forEach var="message" items="${msgList}" varStatus="loop">
 			<tr>
 				<td>${message.msg_seq}</td>

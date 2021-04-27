@@ -13,6 +13,7 @@
 		비밀번호 : <input name="password" />
 		<input type="submit" value="삭제"><a href="<c:url value="/read/${board_seq}" />">취소</a>
 	</form>
+	
 	<div>${msg}</div>
 </body>
 </html>

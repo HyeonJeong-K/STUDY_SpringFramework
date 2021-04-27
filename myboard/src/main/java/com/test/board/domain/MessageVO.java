@@ -42,30 +42,35 @@ public class MessageVO {
 	public void setMsg_seq(int msg_seq) {
 		this.msg_seq = msg_seq;
 	}
+	
 	public int getBoard_seq() {
 		return board_seq;
 	}
 	public void setBoard_seq(int board_seq) {
 		this.board_seq = board_seq;
 	}
+	
 	public String getMsg_title() {
 		return msg_title;
 	}
 	public void setMsg_title(String msg_title) {
 		this.msg_title = msg_title;
 	}
+	
 	public String getMsg_text() {
 		return msg_text;
 	}
 	public void setMsg_text(String msg_text) {
 		this.msg_text = msg_text;
 	}
+	
 	public String getMsg_writer() {
 		return msg_writer;
 	}
 	public void setMsg_writer(String msg_writer) {
 		this.msg_writer = msg_writer;
 	}
+	
 	public Timestamp getMsg_date() {
 		return msg_date;
 	}

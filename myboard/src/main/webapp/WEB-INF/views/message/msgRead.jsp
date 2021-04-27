@@ -26,7 +26,6 @@
 			<th>작성일</th>
 			<td>${messageVO.msg_date}</td>
 		</tr>
-
 	</table>
 	
 	<div>

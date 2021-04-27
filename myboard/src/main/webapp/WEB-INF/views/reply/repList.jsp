@@ -8,6 +8,7 @@
 		<th>댓글 내용</th>
 		<th>작성일</th>
 	</tr>
+	
 	<c:forEach var="reply" items="${repList}" varStatus="loop">
 		<tr>
 			<td>${reply.rep_writer}</td>
@@ -15,4 +16,5 @@
 			<td>${reply.rep_date}</td>
 		</tr>
 	</c:forEach>
+	
 </table>

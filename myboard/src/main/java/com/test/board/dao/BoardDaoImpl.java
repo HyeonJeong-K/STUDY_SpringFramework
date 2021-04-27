@@ -20,6 +20,7 @@ public class BoardDaoImpl implements BoardDao{
 	}
 	
 	// 게시판 기능
+	
 	@Override
 	public List<BoardVO> list() {
 		return sqlSessionTemplate.selectList("list");
@@ -55,6 +56,7 @@ public class BoardDaoImpl implements BoardDao{
 
 
 	// 댓글기능
+	
 	@Override
 	public List<ReplyVO> repList(int board_seq) {
 		return sqlSessionTemplate.selectList("repList", board_seq);

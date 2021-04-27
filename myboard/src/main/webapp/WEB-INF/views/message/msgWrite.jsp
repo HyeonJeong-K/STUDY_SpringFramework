@@ -14,12 +14,10 @@
 			<tr>
 				<th><form:label path="msg_title">제 목</form:label></th>
 				<td><form:input path="msg_title" /><form:errors path="msg_title" /></td>
-				
 			</tr>
 			<tr>
 				<th><form:label path="msg_text">내 용</form:label></th>
 				<td><form:input path="msg_text" /><form:errors path="msg_text" /></td>
-				
 			</tr>
 			<tr>
 				<th><form:label path="msg_writer">작성자</form:label></th>
@@ -30,6 +28,7 @@
 				<td><form:input path="board_seq" value="${boardVO.board_seq}" /><form:errors path="board_seq" /></td>
 			</tr>
 		</table>
+		
 		<div>
 			<input type="submit" value="등록">&nbsp&nbsp
 			<a href="<c:url value="/list"/>">목 록</a>

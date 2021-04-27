@@ -8,6 +8,7 @@ import com.test.board.domain.ReplyVO;
 public interface BoardDao {
 	
 	// 게시판 기능
+	
 	public abstract List<BoardVO> list();
 	
 	public abstract void insert(BoardVO boardVO);
@@ -23,6 +24,7 @@ public interface BoardDao {
 	
 	
 	// 댓글 기능
+	
 	public abstract List<ReplyVO> repList(int board_seq);
 	
 	public abstract void repInsert(ReplyVO replyVO);

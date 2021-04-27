@@ -22,7 +22,6 @@ public class ReplyVO {
 	private String rep_writer;
 	private Timestamp rep_date;
 	
-	
 	public ReplyVO() {}
 	
 	public ReplyVO(int rep_seq, int board_seq, String rep_text, String rep_writer, Timestamp rep_date) {
@@ -40,24 +39,28 @@ public class ReplyVO {
 	public void setRep_seq(int rep_seq) {
 		this.rep_seq = rep_seq;
 	}
+	
 	public int getBoard_seq() {
 		return board_seq;
 	}
 	public void setBoard_seq(int board_seq) {
 		this.board_seq = board_seq;
 	}
+	
 	public String getRep_text() {
 		return rep_text;
 	}
 	public void setRep_text(String rep_text) {
 		this.rep_text = rep_text;
 	}
+	
 	public String getRep_writer() {
 		return rep_writer;
 	}
 	public void setRep_writer(String rep_writer) {
 		this.rep_writer = rep_writer;
 	}
+	
 	public Timestamp getRep_date() {
 		return rep_date;
 	}

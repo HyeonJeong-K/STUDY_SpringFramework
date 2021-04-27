@@ -22,6 +22,8 @@
 				from MESSAGE where "BOARD_SEQ" = #{board_seq} order by "MSG_SEQ" desc, "MSG_DATE" desc ]]>
 	</select>
 
+
+
 	<resultMap id="MessageResultMap" type="MessageVO">
 		<id property="msg_seq" column="msg_seq" />
 		<id property="board_seq" column="board_seq" />

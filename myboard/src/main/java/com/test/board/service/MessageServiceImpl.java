@@ -19,6 +19,7 @@ public class MessageServiceImpl implements MessageService{
 	}
 	
 	// 쪽지 기능
+	
 	@Override
 	public List<MessageVO> msgList(int board_seq) {
 		return messageDao.msgList(board_seq);

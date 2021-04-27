@@ -39,7 +39,7 @@
 	</div>
 	
 	<div>
-		<a href="<c:url value="/msgWrite/${boardVO.board_seq}"/>">쪽지보내기</a>
+		<a href="<c:url value="/msgWrite/${boardVO.board_seq}"/>">쪽지 보내기</a>
 	</div>
 	
 	<form:form commandName="replyVO" method="POST">
