@@ -26,6 +26,8 @@ public class BoardController {
 		this.messageService = messageService;
 	}
 	
+	
+	
 	// 글 목록
 	@RequestMapping(value = "/list") // 글 목록
 	public String list(Model model) {

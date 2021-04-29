@@ -43,6 +43,36 @@
 			<artifactId>spring-jdbc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
+		
+		
+		
+		<!-- file upload를 위해 추가한 것 -->
+		<dependency> 
+			<groupId>org.springframework</groupId> 
+			<artifactId>spring-test</artifactId> 
+			<version>${org.springframework-version}</version> 
+			<scope>test</scope> 
+		</dependency> 
+		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok --> 
+		<dependency> 
+			<groupId>org.projectlombok</groupId> 
+			<artifactId>lombok</artifactId> 
+			<version>1.18.8</version> 
+			<scope>provided</scope> 
+		</dependency> 
+		<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjrt --> 
+		<dependency> 
+			<groupId>org.aspectj</groupId> 
+			<artifactId>aspectjrt</artifactId> 
+			<version>1.9.4</version> 
+		</dependency> 
+		<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver --> 
+		<dependency> 
+			<groupId>org.aspectj</groupId> 
+			<artifactId>aspectjweaver</artifactId> 
+			<version>1.9.4</version> 
+		</dependency>
+
 
 
 		<!-- AspectJ -->
@@ -116,6 +146,7 @@
 			<version>2.2</version>
 			<scope>provided</scope>
 		</dependency>
+		
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
