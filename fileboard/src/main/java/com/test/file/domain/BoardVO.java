@@ -116,5 +116,14 @@ public class BoardVO {
 	public void setUploadFile(MultipartFile uploadFile) {
 		this.uploadFile = uploadFile;
 	}
+
+	@Override
+	public String toString() {
+		return "BoardVO [board_seq=" + board_seq + ", title=" + title + ", content=" + content + ", writer=" + writer
+				+ ", password=" + password + ", regdate=" + regdate + ", readcnt=" + readcnt + ", file_name="
+				+ file_name + ", uploadFile=" + uploadFile + "]";
+	}
+	
+	
 	
 }

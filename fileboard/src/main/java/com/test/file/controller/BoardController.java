@@ -1,7 +1,9 @@
 package com.test.file.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.UUID;
@@ -40,74 +42,61 @@ public class BoardController {
 
 	// 글 읽기
 	@RequestMapping(value = "/read/{board_seq}", method = RequestMethod.GET) // 페이지 링크 값 c:url value="/board/read/${board.seq}" 글 읽기
-	public String read(Model model, @PathVariable int board_seq, HttpServletRequest request, HttpServletResponse response) {
+	public String read(Model model, @PathVariable int board_seq) {
 		model.addAttribute("boardVO", boardService.select(board_seq));
 		
-		String file_name = request.getParameter("file_name");
-		String realFileName = "";
-		
-		try {
-			String browser = request.getHeader("User-Agent");
-			// 파일 인코딩
-			if(browser.contains("MSIE") || browser.contains("Trident") || browser.contains("Chrome")) {
-				file_name = URLEncoder.encode(file_name, "UTF-8").replace("\\+", "%20");
-			} else {
-				file_name = new String(file_name.getBytes("UTF-8"), "ISO-8859-1");
-			}
-		} catch(UnsupportedEncodingException ex) {
-			System.out.println("인코딩 안해!");
-		}
-		
-		realFileName = "D:\\file\\" + file_name;
-		File file = new File(realFileName);
-		if(!file.exists()) {
-			return null;
-		}
-		
-		// 파일명 지정
-		response.setContentType("application/octer-strean");
-		response.setHeader("Content-Transfer-Encoding", "binary");
-		response.setHeader("Content-Disposition", "attachment; file_name=\"" + file_name + "\"");
-		
 		return "/board/read";
 	}
 	
-	// 파일 다운로드
-	@RequestMapping(value = "/read/{board_seq}/{file_name}") 
-	public String download( @PathVariable int board_seq, @PathVariable String file_name, HttpServletRequest request, HttpServletResponse response) {
-		// String path = request.getSession().getServletContext().getRealPath("저장경로")
-		
-		file_name = request.getParameter("file_name");
-		String realFileName = "";
-		
-		try {
-			String browser = request.getHeader("User-Agent");
-			// 파일 인코딩
-			if(browser.contains("MSIE") || browser.contains("Trident") || browser.contains("Chrome")) {
-				file_name = URLEncoder.encode(file_name, "UTF-8").replace("\\+", "%20");
-			} else {
-				file_name = new String(file_name.getBytes("UTF-8"), "ISO-8859-1");
-			}
-		} catch(UnsupportedEncodingException ex) {
-			System.out.println("인코딩 안해!");
-		}
-		
-		realFileName = "D:\\file\\" + file_name;
-		File file = new File(realFileName);
-		if(!file.exists()) {
-			return null;
-		}
-		
-		// 파일명 지정
-		response.setContentType("application/octer-strean");
-		response.setHeader("Content-Transfer-Encoding", "binary");
-		response.setHeader("Content-Disposition", "attachment; file_name=\"" + file_name + "\"");
-		
-		
-		return "/board/read";
-	}
+	// 파일 다운로드 기능
+	@RequestMapping(value = "/down/{file_name}", method = RequestMethod.GET) // {file_name}로 받은 값으로 이름이 저장됨..왜???
+	public void down(Model model, @PathVariable String file_name, HttpServletRequest request, HttpServletResponse response) {
+		//String path =  request.getSession().getServletContext().getRealPath("저장경로");
+        
+        file_name = request.getParameter("fileName");
+        String realFilename="";
+        System.out.println(file_name);
+         
+        try {
+            String browser = request.getHeader("User-Agent"); 
+            //파일 인코딩 
+            if (browser.contains("MSIE") || browser.contains("Trident") || browser.contains("Chrome")) {
+            	file_name = URLEncoder.encode(file_name, "UTF-8").replaceAll("\\+", "%20");
+            } else {
+            	file_name = new String(file_name.getBytes("UTF-8"), "ISO-8859-1");
+            }
+        } catch (UnsupportedEncodingException ex) {
+            System.out.println("UnsupportedEncodingException");
+        }
+        realFilename = "D:\\file\\" + file_name;
+        System.out.println(realFilename);
+        
+        File file1 = new File(realFilename);
+        if (!file1.exists()) {
+            return ;
+        }
+         
+        // 파일명 지정        
+        response.setContentType("application/octer-stream");
+        response.setHeader("Content-Transfer-Encoding", "binary;");
+        response.setHeader("Content-Disposition", "attachment; file_name=\"" + file_name + "\"");
+        try {
+            OutputStream os = response.getOutputStream();
+            FileInputStream fis = new FileInputStream(realFilename);
+ 
+            int ncount = 0;
+            byte[] bytes = new byte[512];
+ 
+            while ((ncount = fis.read(bytes)) != -1 ) {
+                os.write(bytes, 0, ncount);
+            }
+            fis.close();
+            os.close();
+        } catch (Exception e) {
+            System.out.println("FileNotFoundException : " + e);
+        }
+    }
 	
-
 	// 새 글 작성을 위한 요청 처리
 	@RequestMapping(value = "/write", method = RequestMethod.GET)
 	public String write(Model model) {
