@@ -4,31 +4,31 @@
 
 	<!-- 게시판 쿼리 -->
 	<insert id="insert"> 
-		insert into BOARD (board_seq, title, content, writer, password, regdate, readcnt, file_name)
+		insert into FILE_BOARD (board_seq, title, content, writer, password, regdate, readcnt, file_name)
 		values (board_seq.nextval, #{title}, #{content}, #{writer}, #{password}, sysdate, #{readcnt}, #{file_name})
 	</insert>
 	
 	<select id="select" resultMap="BoardResultMap"> 
 		select "BOARD_SEQ", "TITLE", "CONTENT", "WRITER", "REGDATE", "READCNT", "FILE_NAME"
-		from BOARD where BOARD_SEQ = #{board_seq}
+		from FILE_BOARD where BOARD_SEQ = #{board_seq}
 	</select>
 	
 	<update id="update"> 
-		update BOARD set "TITLE" = #{title}, "CONTENT" = #{content}, "WRITER" = #{writer}, "FILE_NAME" = #{file_name}
+		update FILE_BOARD set "TITLE" = #{title}, "CONTENT" = #{content}, "WRITER" = #{writer}, "FILE_NAME" = #{file_name}
 		where BOARD_SEQ = #{board_seq} and PASSWORD = #{password}
 	</update>
 	
 	<delete id="delete"> 
-		delete from BOARD where board_seq = #{board_seq} and password = #{password}
+		delete from FILE_BOARD where board_seq = #{board_seq} and password = #{password}
 	</delete>
 	
 	<select id="list" resultType="BoardVO"> 
-	<![CDATA[ select "BOARD_SEQ", "TITLE", "CONTENT", "WRITER", "REGDATE", "READCNT" 
-				from BOARD where "BOARD_SEQ" > 0 order by "BOARD_SEQ" desc, "REGDATE" desc ]]>
+	<![CDATA[ select "BOARD_SEQ", "TITLE", "CONTENT", "WRITER", "REGDATE", "READCNT", "FILE_NAME"
+				from FILE_BOARD where "BOARD_SEQ" > 0 order by "BOARD_SEQ" desc, "REGDATE" desc ]]>
 	</select>
 	
 	<update id="updateCount" parameterType="int">
-		update BOARD set READCNT = readcnt + 1 where BOARD_SEQ = #{board_seq}
+		update FILE_BOARD set READCNT = readcnt + 1 where BOARD_SEQ = #{board_seq}
 	</update>
 
 

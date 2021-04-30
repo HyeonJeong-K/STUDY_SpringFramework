@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 "FILE_NAME" varchar2(255)
 );
  */
+
 @Alias("BoardVO")
 public class BoardVO {
 	private int board_seq;
@@ -115,5 +116,5 @@ public class BoardVO {
 	public void setUploadFile(MultipartFile uploadFile) {
 		this.uploadFile = uploadFile;
 	}
-
+	
 }

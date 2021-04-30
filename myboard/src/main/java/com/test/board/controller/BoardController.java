@@ -39,7 +39,7 @@ public class BoardController {
 	@RequestMapping(value = "/read/{board_seq}", method = RequestMethod.GET) // 페이지 링크 값 c:url value="/board/read/${board.seq}" 글 읽기
 	public String read(Model model, @PathVariable int board_seq) {
 		model.addAttribute("boardVO", boardService.select(board_seq));
-		model.addAttribute("repList", boardService.repList(board_seq));
+		model.addAttribute("repListd", boardService.repList(board_seq));
 		model.addAttribute("replyVO", new ReplyVO());
 		return "/board/read";
 	}

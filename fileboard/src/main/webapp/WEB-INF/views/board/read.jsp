@@ -14,6 +14,12 @@
 			<th>제목</th>
 			<td>${boardVO.title}</td>
 		</tr>
+		<c:if test="${boardVO.file_name ne null}">
+		<tr>
+			<th>첨부파일</th>
+			<td><a href="/read/${boardVO.board_seq}/${boardVO.file_name}">${boardVO.file_name}</a></td>
+		</tr>
+		</c:if>
 		<tr>
 			<th>내용</th>
 			<td>${boardVO.content}</td>
