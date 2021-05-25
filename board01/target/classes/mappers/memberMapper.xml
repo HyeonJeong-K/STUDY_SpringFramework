@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.khj.board.mappers.memberMapper">
+
+	<!-- 멤버 쿼리 -->
+
+	<!-- 회원가입 -->
+	<insert id="insertMember" parameterType="memberVO">
+		insert into "MEMBER" ("UID", "NAME", "PASSWORD", "EMAIL", "REGDATE")
+		values( UID_SEQ.nextval, #{name}, #{password}, #{email}, sysdate )
+	</insert>
+	
+	<!-- 로그인 -->
+	<select id="selectMember" parameterType="memberVO" resultType="memberVO">
+		select "UID", "NAME", "PASSWORD", "EMAIL", "REGDATE" from "MEMBER" where "EMAIL" = #{email} and "PASSWORD" = #{password}
+	</select>
+	
+	<!-- 비밀번호 확인 -->
+	<select id="checkPwd" parameterType="memberVO" resultType="memberVO">
+		select "PASSWORD" from "MEMBER" where "EMAIL" = #{email}
+	</select>
+
+	<!-- 회원 정보 수정 -->
+	<update id="updateMember" parameterType="memberVO">
+		update "MEMBER" set "NAME" = #{name}
+		where UID = #{uid} and PASSWORD = #{password}
+	</update>
+
+	<!-- 회원 탈퇴 -->
+	<delete id="delete">
+		delete from "MEMBER" where "UID" = #{uid}
+	</delete>
+	
+	<!-- 로그인 -->
+	
+	
+	<resultMap id="MemberResultMap" type="MemberVO">
+		<id property="uid" column="uid" />
+		<result property="name" column="name" />
+		<result property="password" column="password" />
+		<result property="email" column="email" />
+		<result property="regdate" column="regdate" />
+	</resultMap>
+
+</mapper>

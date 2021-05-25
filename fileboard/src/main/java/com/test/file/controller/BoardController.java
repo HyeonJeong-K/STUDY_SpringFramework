@@ -121,6 +121,8 @@ public class BoardController {
 			UUID uuid = UUID.randomUUID();
 			file_name = uuid + "." + ext;
 			uploadFile.transferTo(new File("D:\\file\\" + file_name));
+		} else {
+			file_name = "";
 		}
 		
 		boardVO.setFile_name(file_name);

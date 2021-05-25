@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper	namespace="com.khj.board.mappers.contentMapper">
+
+	<!-- 게시판 쿼리 -->
+
+	<!-- 글 리스트 -->
+	<select id="list" resultType="contentVO">
+	<![CDATA[ select "CID", "UID", "TITLE", "CONTENT", "CONDATE", "READCNT"
+				from "CONTENTS" where "CID" > 0 order by "CONDATE" desc, "READCNT" desc]]>
+	</select>
+	
+	<!-- 글 등록 -->
+	<insert id="insert"> 
+		insert into "CONTENTS" ("CID", "UID", "TITLE", "CONTENT", "CONDATE", "READCNT")
+		values(CID_SEQ.nextval, #{uid}, #{title}, #{content}, sysdate, default)
+	</insert>
+	
+	<!-- 글 읽기 -->
+	<select id="select" resultMap="ContentResultMap"> 
+		select "CID", "UID", "TITLE", "CONTENT", "CONDATE", "READCNT"
+		from "CONTENTS" where "CID" = #{cid}
+	</select>
+	
+	<!-- 글 수정 -->
+	<update id="update">
+		update "CONTENTS" set "TITLE" = #{title}, "CONTENT" = #{content}, "CONDATE" = sysdate
+		where "CID" = #{cid}
+	</update>
+	
+	<!-- 글 삭제 -->
+	<delete id="delete"> 
+		delete from "CONTENTS" where "CID" = #{cid}
+	</delete>
+	
+	<!-- 조회수 증가 -->
+	<update id="updateCount" parameterType="int">
+		update "CONTENTS" set "READCNT" = #{readcnt} + 1 where CID = #{cid}
+	</update>
+	
+	
+	
+	<!-- 댓글 쿼리 -->
+		
+	<resultMap id="ContentResultMap" type="ContentVO">
+		<id property="cid" column="cid" />
+		<id property="uid" column="uid" />
+		<result property="title" column="title" />
+		<result property="content" column="content" />
+		<result property="condate" column="condate" />
+		<result property="readcnt" column="readcnt" />
+	</resultMap>
+</mapper>
+
