@@ -26,4 +26,10 @@ public class MemberDaoImpl implements MemberDao{
 		return sqlSessionTemplate.selectOne("selectMember", memberVO);
 	}
 	
+	@Override
+	public int idChk(MemberVO memberVO) {
+		int result = sqlSessionTemplate.selectOne("idChk", memberVO);
+		return result;
+	}
+	
 }

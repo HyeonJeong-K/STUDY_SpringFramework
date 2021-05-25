@@ -22,7 +22,7 @@
 				</tr>
 				<tr>
 					<th><label>작성자</label></th>
-					<td><input type="text" name="uid" value="${memberVO.uid}"/></td>
+					<td><input type="text" name="uid" value="${member.uid}"/></td>
 				</tr>
 			</table>
 		</div>

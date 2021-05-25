@@ -10,6 +10,15 @@
 		values( UID_SEQ.nextval, #{name}, #{password}, #{email}, sysdate )
 	</insert>
 	
+	<!-- 아이디 중복확인 -->
+	<select id="idChk" resultType="int">
+		select count(*) from "MEMBER"
+		where "EMAIL" = #{userId}
+	</select>
+	
+	<!-- 비밀번호 확인 -->
+	
+	
 	<!-- 로그인 -->
 	<select id="selectMember" parameterType="memberVO" resultType="memberVO">
 		select "UID", "NAME", "PASSWORD", "EMAIL", "REGDATE" from "MEMBER" where "EMAIL" = #{email} and "PASSWORD" = #{password}

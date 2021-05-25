@@ -16,9 +16,11 @@
 					<td><input type="text" name="name" /></td>
 				</tr>
 				<tr>
-					<th><label>이메일</label></th>
+					<th><label>이메일(아이디)</label></th>
 					<td><input type="text" name="email" /></td>
+					<td><input type="button" name="idChk">중복확인</td>
 				</tr>
+				
 				<tr>
 					<th><label>비밀번호</label></th>
 					<td><input type="text" name="password"/></td>

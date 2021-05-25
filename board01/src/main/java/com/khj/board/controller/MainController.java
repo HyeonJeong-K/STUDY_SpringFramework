@@ -151,7 +151,7 @@ public class MainController {
 				return "redirect:/list";
 			}
 		}
-		model.addAttribute("msg", "비밀번호가 일치하지 않습니다.");
+		//model.addAttribute("msg", "비밀번호가 일치하지 않습니다.");
 		return "/board/edit";
 	}
 
